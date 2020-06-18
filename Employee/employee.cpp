@@ -409,12 +409,25 @@ Employee searchAttendance(string file, string id)
 
     cout<<"Ma nhan vien :"<<id<<" |"<<"Name :"<<e.getName()<<" |"<<"DL :"<<dl<<" |"<<"DLNN :"<<dlnn<<" |"<<"N :"<<n<<" |"<<"NP :"<<np<<"\n";
 }
+int checkLine(){
+    string file="ImportData.csv";
+    string s;
+    int line = 0;
+    ifstream inFile(file, ios::in);
+    while(getline (inFile, s))
+    {
+    line++;
+    }
+    return line;
+}
+
 void searchName(string file,string name){
     Employee e[10000];
     Employee employee;
     ifstream inFile(file, ios::in);
     string line;
     int linenum = 0;
+    bool s =false;
     while (getline (inFile, line))
     {
         istringstream linestream(line);
@@ -431,16 +444,81 @@ void searchName(string file,string name){
         getline(linestream, item, ',');
         employee.setdepartment(item);
         e[linenum] = employee;
+        if(e[linenum].getName()==name){
+            cout<<"\n"<<e[linenum].getId()<<setw(30)<<e[linenum].getName()<<setw(25)<<e[linenum].getdateofbirth()<<setw(35)<<e[linenum].getAdress()<<setw(20)<<e[linenum].getdepartment()<<"\n";
+                    s=true;
+        }
         linenum++;
-    }
-    for (int i=0;i<linenum;i++) {
-        if(e[i].getName()==name){
-            cout<<"\n"<<e[i].getId()<<setw(30)<<e[i].getName()<<setw(25)<<e[i].getdateofbirth()<<setw(35)<<e[i].getAdress()<<setw(20)<<e[i].getdepartment()<<"\n";
-        }else{
-            cout<<"\n Khong tim thay nhan vien ";
-            break;
+
+        }
+    if(s==false){
+            cout<<"Khong tim thay nhan vien";
         }
     }
+int checkMonth(string date,int months){
+    stringstream ss(date);
+    int day, month, year;
+    ss >> day >> month >> year;
+    if(months == month){
+        return  1;
+    }
+    return 0;
+}
+Employee searchThang(string file,int month){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        getline(linestream, item, ',');
+        employee.setId(item);
+        e[linenum].setId(item);
+        getline(linestream, item, ',');
+        employee.setDate(item);
+        e[linenum].setDate(item);
+        getline(linestream, item, ',');
+        employee.setStatus(item);
+        e[linenum].setStatus(item);
+        if(checkMonth(e[linenum].getDate(),month)==1){
+            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+        }
+        linenum++;
+
+    }
+
+
+}
+Employee searchStatus(string file,string status){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        getline(linestream, item, ',');
+        employee.setId(item);
+        e[linenum].setId(item);
+        getline(linestream, item, ',');
+        employee.setDate(item);
+        e[linenum].setDate(item);
+        getline(linestream, item, ',');
+        employee.setStatus(item);
+        e[linenum].setStatus(item);
+        if(e[linenum].getStatus()==status){
+            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+        }
+        linenum++;
+
+    }
+
+
 }
 void importCSV(){
        Employee employee;
@@ -500,7 +578,6 @@ void readCSV(string file){
         myfile<<e[i].getId()<<","<<e[i].getName()<<","<<e[i].getdateofbirth()<<","<<e[i].getAdress()<<","<<e[i].getdepartment()<<"\n";
     }
 }
-
 void pressAnyKey() {
     cout << "\n\nPress any key to continue...";
     getch();

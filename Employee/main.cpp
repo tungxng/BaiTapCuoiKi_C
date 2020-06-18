@@ -24,6 +24,7 @@ int main()
         cout << "==  4. Cham cong nhan vien theo ma nhan vien.           ==\n";
         cout << "==  5. In ra bang cham cong theo ma nhan vien.          ==\n";
         cout << "==  6. In ra bang cham cong theo ma nhan vien.          ==\n";
+        cout << "==  7. Hien thi danh sach diem danh .                   ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
         cout << "Enter a selection: ";
@@ -106,7 +107,60 @@ int main()
         }
             pressAnyKey();
             break;
+        case 7:
+        {
+            do
+            {
+                cout << "Employee Manager\n";
+                cout << "-------------------------MENU-----------------------------\n";
+                cout << "==  1. Hien thi danh sach diem danh theo ma nhan vien    ==\n";
+                cout << "==  2. Hien thi danh sach diem danh theo thang           ==\n";
+                cout << "==  3. Hien thi danh sach diem danh tat ca               ==\n";
 
+                cout << "Enter a selection: ";
+                cin >> key;
+                switch(key)
+                {
+                case 1:
+                {
+                    string id;
+                    cout << "Moi nhap ma nhan vien can kiem tra: ";
+                    cin >> id;
+                    while (checkId(fileCSV, id) != 0) {
+                        cout << "Ma nv ban kiem tra khong ton tai \n" ;
+                        cout << "Moi ban nhap lai ma nhan vien can kiem tra: ";
+                        cin >> id;
+                    }
+
+                    searchAttendance(fileCSV,id);
+                }
+
+                    pressAnyKey();
+                    break;
+                case 2:
+                {
+                    int month;
+                    cout << "Moi nhap thang can kiem tra: ";
+                    cin >> month;
+                    checkMonth(fileCSV,month);
+                }
+
+                    pressAnyKey();
+                    break;
+                case 3:
+                {
+                    string status;
+                    cout << "Moi nhap bo phan can kiem tra: ";
+                    cin >> status;
+                    searchStatus(fileCSV,status);
+                }
+
+                    pressAnyKey();
+                    break;
+
+            }
+            }while (key == 1 || key == 2||key == 3);
+        }
         case 0:
             cout << "\nBan da thoat chuong trinh!";
             getch();
@@ -117,9 +171,7 @@ int main()
             pressAnyKey();
             break;
     }
-    }while (key == 1 || key == 2||key == 3 || key == 4);
+    }while (key == 1 || key == 2||key == 3 || key == 4 ||key==5 ||key==6);
 
     return 0;
 }
-
-
