@@ -380,7 +380,34 @@ Employee searchThang(string file,int month){
 
 
 }
+Employee searchStatus(string file,string status){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        getline(linestream, item, ',');
+        employee.setId(item);
+        e[linenum].setId(item);
+        getline(linestream, item, ',');
+        employee.setDate(item);
+        e[linenum].setDate(item);
+        getline(linestream, item, ',');
+        employee.setStatus(item);
+        e[linenum].setStatus(item);
+        if(e[linenum].getStatus()==status){
+            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+        }
+        linenum++;
 
+    }
+
+
+}
 Employee searchAttendance(string file, string id)
 {
     Employee e;

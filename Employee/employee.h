@@ -51,4 +51,5 @@ void readCSV(string file);
 Employee searchAttendance(string file, string id);
 Employee searchThang(string file,int month);
 int checkMonth(string date,int months);
+Employee searchStatus(string file,string status);
 #endif // EMPLOYEE_H
