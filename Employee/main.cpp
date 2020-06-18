@@ -23,6 +23,7 @@ int main()
         cout << "==  3. In ra danh sach nhan vien (file importData.csv). ==\n";
         cout << "==  4. Cham cong nhan vien theo ma nhan vien.           ==\n";
         cout << "==  5. In ra bang cham cong theo ma nhan vien.          ==\n";
+        cout << "==  6. In ra bang cham cong theo ma nhan vien.          ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
         cout << "Enter a selection: ";
@@ -55,11 +56,13 @@ int main()
             break;
         case 3:
         {
-
+            cout << "Danh sach nhan vien  : \n";
+            importCSV();
         }
 
             pressAnyKey();
             break;
+
         case 4:
         {
             cout << "Cham cong nhan vien theo ma nhan vien: \n";
@@ -86,6 +89,20 @@ int main()
             }
 
             searchAttendance(fileCSV,id);
+        }
+        case 6:
+        {
+            string name;
+            string firtName;
+            string lastName;
+            cout << "Tim theo ten nhan vien   : \n";
+            cout << "Moi ban nhap ho nhan vien   : \n";
+            cin>>firtName;
+            cout << "Moi ban nhap ten nhan vien   : \n";
+            cin>>lastName;
+            name =firtName+" "+lastName;
+            cout << "Thong tin nhan vien   : \n";
+            searchName(fileDataCSV,name);
         }
             pressAnyKey();
             break;
