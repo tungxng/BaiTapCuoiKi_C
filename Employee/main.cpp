@@ -23,6 +23,7 @@ int main()
         cout << "==  3. In ra danh sach nhan vien (file importData.csv). ==\n";
         cout << "==  4. Cham cong nhan vien theo ma nhan vien.           ==\n";
         cout << "==  5. In ra bang cham cong theo ma nhan vien.          ==\n";
+        cout << "==  6. In ra bang cham cong theo ma nhan vien.          ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
         cout << "Enter a selection: ";

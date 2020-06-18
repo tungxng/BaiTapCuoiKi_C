@@ -436,6 +436,9 @@ void searchName(string file,string name){
     for (int i=0;i<linenum;i++) {
         if(e[i].getName()==name){
             cout<<"\n"<<e[i].getId()<<setw(30)<<e[i].getName()<<setw(25)<<e[i].getdateofbirth()<<setw(35)<<e[i].getAdress()<<setw(20)<<e[i].getdepartment()<<"\n";
+        }else{
+            cout<<"\n Khong tim thay nhan vien ";
+            break;
         }
     }
 }
