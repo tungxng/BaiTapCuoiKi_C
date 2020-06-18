@@ -49,4 +49,6 @@ void importCSV();
 void searchName(string file,string name);
 void readCSV(string file);
 Employee searchAttendance(string file, string id);
+Employee searchThang(string file,int month);
+int checkMonth(string date,int months);
 #endif // EMPLOYEE_H

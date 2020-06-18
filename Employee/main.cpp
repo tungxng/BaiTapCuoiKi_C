@@ -9,6 +9,17 @@ using std::setw;
 
 int main()
 {
+    int x;
+    cout<<"anhap thang can tim";
+    cin>>x;
+    searchThang("chamcong.txt",x);
+
+
+
+
+
+
+
     string filePath = "employee.txt";
     string fileCSV = "chamcong.txt";
     string fileDataCSV = "ImportData.csv";

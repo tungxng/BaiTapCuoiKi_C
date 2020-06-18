@@ -223,6 +223,15 @@ int checkDating(string date){
     }
     return 0;
 }
+int checkMonth(string date,int months){
+    stringstream ss(date);
+    int day, month, year;
+    ss >> day >> month >> year;
+    if(months == month){
+        return  1;
+    }
+    return 0;
+}
 void writeFileTxt(string file)
 {
     ofstream myfile(file, ios::app);
@@ -298,7 +307,6 @@ int checkStatus(string status){
     }
     return 0;
 }
-
 void inputAttendance(string file)
 {
     ofstream myfile(file, ios::app);
@@ -344,6 +352,34 @@ void inputAttendance(string file)
     }
 
 }
+Employee searchThang(string file,int month){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        getline(linestream, item, ',');
+        employee.setId(item);
+        e[linenum].setId(item);
+        getline(linestream, item, ',');
+        employee.setDate(item);
+        e[linenum].setDate(item);
+        getline(linestream, item, ',');
+        employee.setStatus(item);
+        e[linenum].setStatus(item);
+        if(checkMonth(e[linenum].getDate(),month)==1){
+            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+        }
+        linenum++;
+
+    }
+
+}
+
 Employee searchAttendance(string file, string id)
 {
     Employee e;
@@ -427,7 +463,7 @@ void searchName(string file,string name){
         getline(linestream, item, ',');
         employee.setdateofbirth(item);
         getline(linestream, item, ',');
-        employee.setAdress(item);
+       employee.setAdress(item);
         getline(linestream, item, ',');
         employee.setdepartment(item);
         e[linenum] = employee;
@@ -442,6 +478,7 @@ void searchName(string file,string name){
         }
     }
 }
+
 void importCSV(){
        Employee employee;
        Employee e[10000];
