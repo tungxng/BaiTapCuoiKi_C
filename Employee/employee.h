@@ -45,5 +45,8 @@ int checkDating(string date);
 void print(Employee e);
 void inputAttendance(string file);
 void pressAnyKey();
+void importCSV();
+void searchName(string file,string name);
+void readCSV(string file);
 Employee searchAttendance(string file, string id);
 #endif // EMPLOYEE_H

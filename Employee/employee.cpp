@@ -409,6 +409,94 @@ Employee searchAttendance(string file, string id)
 
     cout<<"Ma nhan vien :"<<id<<" |"<<"Name :"<<e.getName()<<" |"<<"DL :"<<dl<<" |"<<"DLNN :"<<dlnn<<" |"<<"N :"<<n<<" |"<<"NP :"<<np<<"\n";
 }
+void searchName(string file,string name){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        //use this to get up to the first comma
+        getline(linestream, item, ',');
+        employee.setId(item);
+        getline(linestream, item, ',');
+        employee.setName(item);
+        getline(linestream, item, ',');
+        employee.setdateofbirth(item);
+        getline(linestream, item, ',');
+        employee.setAdress(item);
+        getline(linestream, item, ',');
+        employee.setdepartment(item);
+        e[linenum] = employee;
+        linenum++;
+    }
+    for (int i=0;i<linenum;i++) {
+        if(e[i].getName()==name){
+            cout<<"\n"<<e[i].getId()<<setw(30)<<e[i].getName()<<setw(25)<<e[i].getdateofbirth()<<setw(35)<<e[i].getAdress()<<setw(20)<<e[i].getdepartment()<<"\n";
+        }
+    }
+}
+void importCSV(){
+       Employee employee;
+       Employee e[10000];
+     ifstream inFile("Import1.text", ios::in);
+      string line;
+      int linenum = 0;
+      while (getline (inFile, line))
+      {
+          istringstream linestream(line);
+          string item;
+          //use this to get up to the first comma
+          getline(linestream, item, ',');
+          employee.setId(item);
+          getline(linestream, item, ',');
+          employee.setName(item);
+          getline(linestream, item, ',');
+          employee.setdateofbirth(item);
+          getline(linestream, item, ',');
+          employee.setAdress(item);
+          getline(linestream, item, ',');
+          employee.setdepartment(item);
+          e[linenum] = employee;
+          linenum++;
+      }
+      for (int i=0;i<linenum;i++) {
+          cout<<"\n"<<e[i].getId()<<setw(30)<<e[i].getName()<<setw(25)<<e[i].getdateofbirth()<<setw(35)<<e[i].getAdress()<<setw(20)<<e[i].getdepartment()<<"\n";
+      }
+
+}
+void readCSV(string file){
+    Employee e[10000];
+    Employee employee;
+    ifstream inFile(file, ios::in);
+    ofstream myfile("Import1.text", ios::app);
+    string line;
+    int linenum = 0;
+    while (getline (inFile, line))
+    {
+        istringstream linestream(line);
+        string item;
+        //use this to get up to the first comma
+        getline(linestream, item, ',');
+        employee.setId(item);
+        getline(linestream, item, ',');
+        employee.setName(item);
+        getline(linestream, item, ',');
+        employee.setdateofbirth(item);
+        getline(linestream, item, ',');
+        employee.setAdress(item);
+        getline(linestream, item, ',');
+        employee.setdepartment(item);
+        e[linenum] = employee;
+        linenum++;
+    }
+    for (int i=0;i<linenum;i++) {
+        myfile<<e[i].getId()<<","<<e[i].getName()<<","<<e[i].getdateofbirth()<<","<<e[i].getAdress()<<","<<e[i].getdepartment()<<"\n";
+    }
+}
 
 void pressAnyKey() {
     cout << "\n\nPress any key to continue...";

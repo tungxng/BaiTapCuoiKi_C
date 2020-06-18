@@ -55,11 +55,13 @@ int main()
             break;
         case 3:
         {
-
+            cout << "Danh sach nhan vien  : \n";
+            importCSV();
         }
 
             pressAnyKey();
             break;
+
         case 4:
         {
             cout << "Cham cong nhan vien theo ma nhan vien: \n";
@@ -86,6 +88,20 @@ int main()
             }
 
             searchAttendance(fileCSV,id);
+        }
+        case 6:
+        {
+            string name;
+            string firtName;
+            string lastName;
+            cout << "Tim theo ten nhan vien   : \n";
+            cout << "Moi ban nhap ho nhan vien   : \n";
+            cin>>firtName;
+            cout << "Moi ban nhap ten nhan vien   : \n";
+            cin>>lastName;
+            name =firtName+" "+lastName;
+            cout << "Thong tin nhan vien   : \n";
+            searchName(fileDataCSV,name);
         }
             pressAnyKey();
             break;
