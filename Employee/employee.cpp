@@ -111,11 +111,6 @@ Employee searchEmployee(string file, string id)
                 e.setAdress(token);
                 getline(stm, token, ',');
                 e.setdepartment(token);
-                getline(stm, token, ',');
-                e.setDate(token);
-                getline(stm, token, ',');
-                e.setStatus(token);
-
             }
 
         }
@@ -216,12 +211,13 @@ int checkDating(string date){
     thisyear = 1900 + ltm->tm_year;
     thismonth =1 + ltm->tm_mon;
     thisday =ltm->tm_mday;
-    if(year == thisyear && month==thismonth){
+    while(year == thisyear && month==thismonth){
         if(day<=thisday){
             return 1;
         }
     }
-    return 0;
+
+    return  0;
 }
 int checkMonth(string date,int months){
     stringstream ss(date);
@@ -298,8 +294,14 @@ void print(Employee e)
     cout << "Bo phan cong tac: " << e.getdepartment() << endl;
     cout << "Ngay di lam: " << e.getDate() << endl;
     cout << "Trang thai: " << e.getStatus() << endl;
-
-
+}
+void prints(Employee e)
+{
+    cout << "Ma NV: " << e.getId() << endl;
+    cout << "Ten NV: " << e.getName() << endl;
+    cout << "Ngay thang nam sinh: " << e.getdateofbirth() << endl;
+    cout << "Dia chi: " << e.getAdress() << endl;
+    cout << "Bo phan cong tac: " << e.getdepartment() << endl;
 }
 int checkStatus(string status){
     if(status.compare("DL")==0||status.compare("DLNN")==0||status.compare("N")==0||status.compare("NP")==0){
@@ -321,20 +323,15 @@ void inputAttendance(string file)
             cout << "Nhap ma nhan vien: ";
             cin >> id;
         }
-        cout << "Nhap ngay thang nam di lam: \n";
         while (validateDate(date) == 0)
         {
             getline(cin, date);
-            while (checkDate("chamcong.txt",id,date)==0)
+            while (checkDate("chamcong.txt",id,date)==0 || checkDating(date)==0)
             {
-                cout<<"Ngay nhap da ton tai,moi ban nhap lai \n";
+                cout<<"Nhap ngay thang nam di lam:";
                 getline(cin, date);
-                if(checkDating(date)==0){
-                    cout<<"Ngay nhap khong hop le,moi ban nhap lai\n";
-                    getline(cin, date);
-
-                }
             }
+
         }
 
         cout << "Nhap trang thai : \n";
@@ -355,6 +352,7 @@ void inputAttendance(string file)
 Employee searchThang(string file,int month){
     Employee e[10000];
     Employee employee;
+    ofstream myfile("month.txt", ios::app);
     ifstream inFile(file, ios::in);
     string line;
     int linenum = 0;
@@ -372,18 +370,20 @@ Employee searchThang(string file,int month){
         employee.setStatus(item);
         e[linenum].setStatus(item);
         if(checkMonth(e[linenum].getDate(),month)==1){
-            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+          cout<<e[linenum].getId()<<"|" <<e[linenum].getDate()<<"|"<< e[linenum].getStatus()<<"\n";
+            myfile<<e[linenum].getId()<<","<<e[linenum].getDate()<<","<<e[linenum].getStatus()<<"\n";
         }
         linenum++;
 
     }
-
+    inFile.close();
 
 }
-Employee searchStatus(string file,string status){
+Employee searchStatus(string file){
     Employee e[10000];
     Employee employee;
     ifstream inFile(file, ios::in);
+    ifstream fileInput2("ImportData.csv", ios::in);
     string line;
     int linenum = 0;
     while (getline (inFile, line))
@@ -399,14 +399,36 @@ Employee searchStatus(string file,string status){
         getline(linestream, item, ',');
         employee.setStatus(item);
         e[linenum].setStatus(item);
-        if(e[linenum].getStatus()==status){
-            cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
-        }
+        cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
         linenum++;
 
     }
 
 
+}
+
+Employee test(string file,string department){
+    Employee e[10000];
+    Employee employee;
+    ifstream fileInput2("ImportData.csv", ios::in);
+    string line;
+    int linenum = 0;
+    while (!fileInput2.eof())
+    {
+        getline(fileInput2, line);
+        string epl = line;
+        istringstream stm(epl);
+        string token;
+        getline(stm, token, ',');
+        getline(stm, token, ',');
+        getline(stm, token, ',');
+        getline(stm, token, ',');
+        getline(stm, token, ',');
+        if(token==department){
+            searchStatus(file);
+        }
+    }
+    fileInput2.close();
 }
 Employee searchAttendance(string file, string id)
 {
@@ -432,10 +454,14 @@ Employee searchAttendance(string file, string id)
             if (token == id)
             {
                 e.setId(id);
+                arr[couts].setId(token);
                 getline(stm, token, ',');
                 e.setDate(token);
+                arr[couts].setDate(token);
                 getline(stm, token, ',');
                 e.setStatus(token);
+                arr[couts].setStatus(token);
+
                 if(e.getStatus().compare("DL")==0){
                     dl++;
                 }else if (e.getStatus().compare("DLNN")==0) {
@@ -445,8 +471,11 @@ Employee searchAttendance(string file, string id)
                 }else if (e.getStatus().compare("NP")==0) {
                     np++;
                 }
+                cout<<arr[couts].getId()<<"| "<<arr[couts].getDate()<<"| "<<arr[couts].getStatus()<<"\n";
                 couts++;
+
             }
+
 
         }
         fileInput.close();
@@ -467,10 +496,10 @@ Employee searchAttendance(string file, string id)
              }
 
         }
-        fileInput.close();
+        fileInput2.close();
     }
 
-
+    cout<<"Tong ket :"<<"\n";
     cout<<"Ma nhan vien :"<<id<<" |"<<"Name :"<<e.getName()<<" |"<<"DL :"<<dl<<" |"<<"DLNN :"<<dlnn<<" |"<<"N :"<<n<<" |"<<"NP :"<<np<<"\n";
 }
 void searchName(string file,string name){
@@ -565,6 +594,13 @@ void readCSV(string file){
         myfile<<e[i].getId()<<","<<e[i].getName()<<","<<e[i].getdateofbirth()<<","<<e[i].getAdress()<<","<<e[i].getdepartment()<<"\n";
     }
 }
+bool DeleteFile(const char* file_path)
+{
+  int ret = remove(file_path);
+  bool is_ok = (ret  == 0) ? true : false;
+  return ret;
+}
+
 
 void pressAnyKey() {
     cout << "\n\nPress any key to continue...";

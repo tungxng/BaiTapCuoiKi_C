@@ -9,9 +9,11 @@ using std::setw;
 
 int main()
 {
+
     string filePath = "employee.txt";
     string fileCSV = "chamcong.txt";
     string fileDataCSV = "ImportData.csv";
+    string filemonth = "month.txt";
     string y;
     int key;
     do
@@ -22,8 +24,8 @@ int main()
         cout << "==  2. Tim nhan vien bang ma nhan vien.                 ==\n";
         cout << "==  3. In ra danh sach nhan vien (file importData.csv). ==\n";
         cout << "==  4. Cham cong nhan vien theo ma nhan vien.           ==\n";
-        cout << "==  5. In ra bang cham cong theo ma nhan vien.          ==\n";
-        cout << "==  6. In ra bang cham cong theo ma nhan vien.          ==\n";
+        cout << "==  5. Tim theo ten nhan vien.                         ==\n";
+        cout << "==  6. Hien thi danh sach diem danh.                    ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
         cout << "Enter a selection: ";
@@ -32,8 +34,14 @@ int main()
         {
         case 1:
         {
-            cout << "Moi nhap thong tin nhan vien: \n";
-            writeFileTxt(filePath);
+            int x;
+            cout<<"Nhap so nhan vien muon them :";
+            cin>>x;
+            for(int i=0;i<x;i++){
+                cout << "Nhap nhan vien thu:"<<i+1<<"\n";
+                writeFileTxt(filePath);
+            }
+
         }
 
             pressAnyKey();
@@ -49,7 +57,7 @@ int main()
                 cin >> id;
             }
             cout << "Thong tin cua nhan vien co ma " << id << endl;
-            print(searchEmployee(filePath, id));
+            prints(searchEmployee(filePath, id));
         }
 
             pressAnyKey();
@@ -78,20 +86,6 @@ int main()
             break;
         case 5:
         {
-            cout << "In ra bang cham cong theo ma nhan vien. \n";
-            string id;
-            cout << "Moi nhap ma nhan vien can kiem tra: ";
-            cin >> id;
-            while (checkId(fileCSV, id) != 0) {
-                cout << "Ma nv ban kiem tra khong ton tai \n" ;
-                cout << "Moi ban nhap lai ma nhan vien can kiem tra: ";
-                cin >> id;
-            }
-
-            searchAttendance(fileCSV,id);
-        }
-        case 6:
-        {
             string name;
             string firtName;
             string lastName;
@@ -106,21 +100,20 @@ int main()
         }
             pressAnyKey();
             break;
-        case 7:
+        case 6:
         {
+
             do
             {
                 cout << "Employee Manager\n";
-                cout << "-------------------------MENU-----------------------------\n";
-                cout << "==  1. Hien thi danh sach diem danh theo ma nhan vien    ==\n";
-                cout << "==  2. Hien thi danh sach diem danh theo thang           ==\n";
-                cout << "==  3. Hien thi danh sach diem danh tat ca               ==\n";
-
+                cout << "-------------------------MENU----------------------------- \n";
+                cout << "==  1. Chon thang can kiem tra                           ==\n";
+                cout << "==  2. Hien thi danh sach diem danh theo ma nhan vien    ==\n";
                 cout << "Enter a selection: ";
                 cin >> key;
                 switch(key)
                 {
-                case 1:
+                case 2:
                 {
                     string id;
                     cout << "Moi nhap ma nhan vien can kiem tra: ";
@@ -130,32 +123,35 @@ int main()
                         cout << "Moi ban nhap lai ma nhan vien can kiem tra: ";
                         cin >> id;
                     }
-
-                    searchAttendance(fileCSV,id);
+                    searchAttendance(filemonth,id);
+                    pressAnyKey();
+                    DeleteFile("month.txt");
+                    break;
                 }
 
-                    pressAnyKey();
-                    break;
-                case 2:
+
+                case 1:
                 {
                     int month;
                     cout << "Moi nhap thang can kiem tra: ";
                     cin >> month;
-                    checkMonth(fileCSV,month);
-                }
-
+                    searchThang(fileCSV,month);
                     pressAnyKey();
                     break;
+                }
+
+
                 case 3:
                 {
                     string status;
                     cout << "Moi nhap bo phan can kiem tra: ";
                     cin >> status;
-                    searchStatus(fileCSV,status);
-                }
-
+                    test(fileCSV,status);
                     pressAnyKey();
                     break;
+                }
+
+
 
             }
             }while (key == 1 || key == 2||key == 3);

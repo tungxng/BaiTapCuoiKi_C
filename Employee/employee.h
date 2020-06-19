@@ -43,6 +43,7 @@ void writeFileTxt(string file);
 int checkDate(string file,string id,string date);
 int checkDating(string date);
 void print(Employee e);
+void prints(Employee e);
 void inputAttendance(string file);
 void pressAnyKey();
 void importCSV();
@@ -51,5 +52,7 @@ void readCSV(string file);
 Employee searchAttendance(string file, string id);
 Employee searchThang(string file,int month);
 int checkMonth(string date,int months);
-Employee searchStatus(string file,string status);
+Employee searchStatus(string file,string department);
+Employee test(string file,string department);
+bool DeleteFile(const char* file_path);
 #endif // EMPLOYEE_H
