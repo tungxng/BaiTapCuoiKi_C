@@ -139,22 +139,11 @@ int main()
                     pressAnyKey();
                     break;
                 }
-
-
-                case 3:
-                {
-                    string status;
-                    cout << "Moi nhap bo phan can kiem tra: ";
-                    cin >> status;
-                    test(fileCSV,status);
-                    pressAnyKey();
-                    break;
-                }
-
-
-
             }
+
             }while (key == 1 || key == 2||key == 3);
+            pressAnyKey();
+            break;
         }
         case 0:
             cout << "\nBan da thoat chuong trinh!";
