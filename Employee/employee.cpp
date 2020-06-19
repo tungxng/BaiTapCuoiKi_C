@@ -424,6 +424,7 @@ int checkLine(){
 void searchName(string file,string name){
     Employee e[10000];
     Employee employee;
+     ofstream myfile("searchName.csv", ios::app);
     ifstream inFile(file, ios::in);
     string line;
     int linenum = 0;
@@ -445,7 +446,9 @@ void searchName(string file,string name){
         employee.setdepartment(item);
         e[linenum] = employee;
         if(e[linenum].getName()==name){
+
             cout<<"\n"<<e[linenum].getId()<<setw(30)<<e[linenum].getName()<<setw(25)<<e[linenum].getdateofbirth()<<setw(35)<<e[linenum].getAdress()<<setw(20)<<e[linenum].getdepartment()<<"\n";
+            myfile<<"\n"<<e[linenum].getId()<<setw(30)<<e[linenum].getName()<<setw(25)<<e[linenum].getdateofbirth()<<setw(35)<<e[linenum].getAdress()<<setw(20)<<e[linenum].getdepartment()<<"\n";
                     s=true;
         }
         linenum++;
@@ -466,6 +469,7 @@ int checkMonth(string date,int months){
 }
 Employee searchThang(string file,int month){
     Employee e[10000];
+    ofstream myfile("searchThang.csv", ios::app);
     Employee employee;
     ifstream inFile(file, ios::in);
     string line;
@@ -485,6 +489,7 @@ Employee searchThang(string file,int month){
         e[linenum].setStatus(item);
         if(checkMonth(e[linenum].getDate(),month)==1){
             cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+            myfile<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
         }
         linenum++;
 
@@ -495,6 +500,7 @@ Employee searchThang(string file,int month){
 Employee searchStatus(string file,string status){
     Employee e[10000];
     Employee employee;
+    ofstream myfile("searchStatus.csv", ios::app);
     ifstream inFile(file, ios::in);
     string line;
     int linenum = 0;
@@ -513,6 +519,7 @@ Employee searchStatus(string file,string status){
         e[linenum].setStatus(item);
         if(e[linenum].getStatus()==status){
             cout<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
+            myfile<<e[linenum].getId()<<e[linenum].getDate()<<e[linenum].getStatus()<<"\n";
         }
         linenum++;
 

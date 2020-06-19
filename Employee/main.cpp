@@ -23,7 +23,7 @@ int main()
         cout << "==  3. In ra danh sach nhan vien (file importData.csv). ==\n";
         cout << "==  4. Cham cong nhan vien theo ma nhan vien.           ==\n";
         cout << "==  5. In ra bang cham cong theo ma nhan vien.          ==\n";
-        cout << "==  6. In ra bang cham cong theo ma nhan vien.          ==\n";
+        cout << "==  6. Tim kiem nhan vien theo ten           .          ==\n";
         cout << "==  7. Hien thi danh sach diem danh .                   ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
@@ -107,6 +107,14 @@ int main()
         }
             pressAnyKey();
             break;
+        case 8:
+        {
+            cout << "Danh sach nhan vien  : \n";
+            importCSV();
+        }
+
+            pressAnyKey();
+            break;
         case 7:
         {
             do
@@ -171,7 +179,7 @@ int main()
             pressAnyKey();
             break;
     }
-    }while (key == 1 || key == 2||key == 3 || key == 4 ||key==5 ||key==6);
+    }while (key == 1 || key == 2||key == 3 || key == 4 ||key==5 ||key==6||key==7);
 
     return 0;
 }
