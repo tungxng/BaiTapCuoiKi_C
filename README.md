@@ -1,9 +1,4 @@
 # EmployeeManager
-<h4>Do git của bạn Phong bị lỗi không đẩy lên được nên em là Tùng(nhóm trưởng) sẽ đẩy lên cả ạ</h4>
- <p>Chi tiết các công việc Phong thực hiện:</p> 
- <p>Tuần 1:Viết hàm thêm nhân viên,validate</p>
- <p>Tuần 2:Viết hàm đọc file csv,thêm trạng thái và ngày đi làm.</p>
-  <p>Chi tiết các công việc Tùng thực hiện:</p> 
- <p>Tuần 1:Viết hàm dựng,tìm kiếm nhân viên,main</p>
- <p>Tuần 2:Viết hàm search trạng thái,thêm trạng thái và ngày đi làm.</p>
+<h1>Do link git hôm trước bị lỗi,nên em up code lên link mới này<h1>
+ <h3>Link git làm việc của tuần 1 và 2 :https://github.com/tungxng/Project_Employee_Manager</h3>
  <h5>Nếu clone thì anh clone nhánh master về ạ,mấy nhánh kia dữ liệu bị sai</h5>
