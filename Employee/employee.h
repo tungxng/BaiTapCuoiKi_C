@@ -36,7 +36,7 @@ class Employee
 };
 
 
-Employee searchEmployee(string file, string id);
+//Employee searchEmployee(string file, string id);
 int validateDate(string dateofbirth);
 int checkId(string file, string id);
 void writeFileTxt(string file);
@@ -53,7 +53,8 @@ void readCSV(string file);
 Employee searchAttendance(string file, string id);
 Employee searchThang(string file,int month);
 int checkMonth(string date,int months);
-Employee searchStatus(string file,string department);
-Employee test(string id);
+Employee searchDepartment(string file,string department);
+string test(string id);
 bool DeleteFile(const char* file_path);
+string printPhongban(Employee e);
 #endif // EMPLOYEE_H

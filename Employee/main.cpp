@@ -6,14 +6,13 @@
 #include <iomanip>
 #include<conio.h>
 using std::setw;
-
+Employee searchEmployee(string file, string id);
 int main()
 {
-    cout<<"aaa\n";
-    test("ANLAB_1");
-    cout<<"aaa\n";
-    string filePath = "employee.txt";
     string fileCSV = "chamcong.txt";
+
+    string filePath = "employee.txt";
+
     string fileDataCSV = "ImportData.csv";
     string filemonth = "month.txt";
     string y;
@@ -29,7 +28,8 @@ int main()
         cout << "==  5. Hien thi diem danh theo ma nhan vien.            ==\n";
         cout << "==  6. Tim theo ten nhan vien.                          ==\n";
         cout << "==  7. Hien thi danh sach diem danh theo thang.         ==\n";
-        cout << "==  8. Xem diem danh cua nhan vien theo thang.          ==\n";
+        cout << "==  8. Hien thi diem danh theo phong ban.               ==\n";
+        cout << "==  9. Xem diem danh cua nhan vien theo thang.          ==\n";
         cout << "==  0. Exit progame.                                    ==\n";
         cout << "----------------------------------------------------------\n";
         cout << "Enter a selection: ";
@@ -92,29 +92,25 @@ int main()
             break;
         case 5:
         {
-            cout << "Cham cong nhan vien theo ma nhan vien: \n";
-            int n;
-            cout<<"Nhap so nhan vien muon cham cong :";
-            cin>>n;
-            for(int i=0;i<n;i++){
-                cout<<"Nhan vien thu :"<<i+1<<"\n";
-                inputAttendance(fileCSV);
+            string id;
+            cout << "Moi nhap ma nhan vien can kiem tra: ";
+            cin >> id;
+            while (checkId(fileCSV, id) != 0) {
+                cout << "Ma nv ban kiem tra khong ton tai \n" ;
+                cout << "Moi ban nhap lai ma nhan vien can kiem tra: ";
+                cin >> id;
             }
-        }
+            searchAttendance(fileCSV,id);
             pressAnyKey();
             break;
+        }
         case 6:
         {
+            cin.ignore();
+
             string name;
-            string firtName;
-            string lastName;
-            cout << "Tim theo ten nhan vien   : \n";
-            cout << "Moi ban nhap ho nhan vien   : \n";
-            cin>>firtName;
-            cout << "Moi ban nhap ten nhan vien   : \n";
-            cin>>lastName;
-            name =firtName+" "+lastName;
-            cout << "Thong tin nhan vien   : \n";
+            cout<<"Nhap ten can tim\n";
+            getline(cin,name);
             searchName(fileDataCSV,name);
         }
             pressAnyKey();
@@ -131,6 +127,17 @@ int main()
             pressAnyKey();
             break;
         case 8:
+        {
+            string pb;
+            cout << "Moi nhap phong ban can kiem tra: ";
+            cin >> pb;
+            searchDepartment(fileCSV,pb);
+            pressAnyKey();
+            break;
+        }
+            pressAnyKey();
+            break;
+        case 9:
         {
 
             do
@@ -186,7 +193,7 @@ int main()
             pressAnyKey();
             break;
     }
-    }while (key == 1 || key == 2||key == 3 || key == 4 ||key==5 ||key==6 ||key==7);
+    }while (key == 1 || key == 2||key == 3 || key == 4 ||key==5 ||key==6 ||key==7||key==8);
 
     return 0;
 }
