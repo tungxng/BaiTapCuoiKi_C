@@ -311,10 +311,11 @@ int checkStatus(string status){
 }
 void inputAttendance(string file)
 {
+
     ofstream myfile(file, ios::app);
     if (myfile.is_open())
     {
-        string id;string date;string status;
+        string id;string date;string status,department;
 
         cout << "Nhap ma nhan vien (VD:ANLAB_1): ";
         cin >> id;
@@ -340,7 +341,9 @@ void inputAttendance(string file)
             cout << "Nhap lai trang thai : \n";
             getline(cin, status);
         }
+
         cout << "-------------------------------------------------" << endl;
+
         myfile << id << "," << date << "," << status << endl;
 
         myfile.close();
@@ -370,7 +373,7 @@ Employee searchThang(string file,int month){
         employee.setStatus(item);
         e[linenum].setStatus(item);
         if(checkMonth(e[linenum].getDate(),month)==1){
-          cout<<e[linenum].getId()<<"|" <<e[linenum].getDate()<<"|"<< e[linenum].getStatus()<<"\n";
+          cout<<e[linenum].getId()<<"              |" <<e[linenum].getDate()<<"               |"<< e[linenum].getStatus()<<"\n";
             myfile<<e[linenum].getId()<<","<<e[linenum].getDate()<<","<<e[linenum].getStatus()<<"\n";
         }
         linenum++;
@@ -407,7 +410,7 @@ Employee searchStatus(string file){
 
 }
 
-Employee test(string file,string department){
+Employee test(string id){
     Employee e[10000];
     Employee employee;
     ifstream fileInput2("ImportData.csv", ios::in);
@@ -420,14 +423,16 @@ Employee test(string file,string department){
         istringstream stm(epl);
         string token;
         getline(stm, token, ',');
-        getline(stm, token, ',');
-        getline(stm, token, ',');
-        getline(stm, token, ',');
-        getline(stm, token, ',');
-        if(token==department){
-            searchStatus(file);
+        if(token==id){
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            employee.setdepartment(token);
         }
+        linenum++;
     }
+    cout<<employee.getdepartment();
     fileInput2.close();
 }
 Employee searchAttendance(string file, string id)
@@ -471,7 +476,7 @@ Employee searchAttendance(string file, string id)
                 }else if (e.getStatus().compare("NP")==0) {
                     np++;
                 }
-                cout<<arr[couts].getId()<<"| "<<arr[couts].getDate()<<"| "<<arr[couts].getStatus()<<"\n";
+                cout<<arr[couts].getId()<<"|           "<<arr[couts].getDate()<<"|            "<<arr[couts].getStatus()<<"\n";
                 couts++;
 
             }
@@ -502,6 +507,94 @@ Employee searchAttendance(string file, string id)
     cout<<"Tong ket :"<<"\n";
     cout<<"Ma nhan vien :"<<id<<" |"<<"Name :"<<e.getName()<<" |"<<"DL :"<<dl<<" |"<<"DLNN :"<<dlnn<<" |"<<"N :"<<n<<" |"<<"NP :"<<np<<"\n";
 }
+
+void phongban(string file, string pb)
+{
+    Employee e;
+    Employee arr[10000];
+    Employee arr2[10000];
+    int couts=0;
+    int dem=0;
+    int dl=0;
+    int dlnn=0;
+    int n=0;
+    int np =0;
+    string line;
+    string id;
+    string x;
+    ifstream fileInput2("ImportData.csv", ios::in);
+    ifstream fileInput(file, ios::in);
+    if (fileInput2.is_open())
+    {
+        while (!fileInput2.eof())
+        {
+            getline(fileInput2, line);
+            string epl = line;
+            istringstream stm(epl);
+            string token;
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+            getline(stm, token, ',');
+
+            if (token == pb)
+            {
+                getline(stm, token, ',');
+                e.setName(token);
+                arr2[dem].setId(token);
+            }
+            dem++;
+
+        }
+        fileInput2.close();
+    }
+    if (fileInput.is_open())
+    {
+        while (!fileInput.eof())
+        {
+            getline(fileInput, line);
+            string epl = line;
+            istringstream stm(epl);
+            string token;
+            getline(stm, token, ',');
+            if (token == id)
+            {
+                e.setId(id);
+                arr[couts].setId(token);
+                getline(stm, token, ',');
+                e.setDate(token);
+                arr[couts].setDate(token);
+                getline(stm, token, ',');
+                e.setStatus(token);
+                arr[couts].setStatus(token);
+
+                if(e.getStatus().compare("DL")==0){
+                    dl++;
+                }else if (e.getStatus().compare("DLNN")==0) {
+                    dlnn++;
+                }else if (e.getStatus().compare("N")==0) {
+                    n++;
+                }else if (e.getStatus().compare("NP")==0) {
+                    np++;
+                }
+                cout<<arr2[dem].getId()<<"| "<<arr[couts].getDate()<<"| "<<arr[couts].getStatus()<<"\n";
+                couts++;
+
+            }
+
+
+        }
+        fileInput.close();
+    }
+
+
+    cout<<"Tong ket :"<<"\n";
+    cout<<"Ma nhan vien :"<<id<<" |"<<"Name :"<<e.getName()<<" |"<<"DL :"<<dl<<" |"<<"DLNN :"<<dlnn<<" |"<<"N :"<<n<<" |"<<"NP :"<<np<<"\n";
+}
+
+
+
 void searchName(string file,string name){
     Employee e[10000];
     Employee employee;
@@ -540,12 +633,15 @@ void searchName(string file,string name){
         }
     }
 
-void importCSV(){
+void importCSV(string file){
        Employee employee;
        Employee e[10000];
-     ifstream inFile("Import1.text", ios::in);
+     ifstream inFile(file, ios::in);
       string line;
       int linenum = 0;
+      if(inFile.fail()){
+          cout<<"File khong ton tai";
+      }
       while (getline (inFile, line))
       {
           istringstream linestream(line);
